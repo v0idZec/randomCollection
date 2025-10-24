@@ -1,18 +1,18 @@
-import secrets
-import string
-import random
+from secrets import choice
+from random import shuffle
+from string import ascii_letters, digits, punctuation
 
 # TODO: improve
 
-def genPass(length = 42, letters = True, digits = True, extras = True) -> str:
+def genPass(length = 42, letters = True, numbers = True, extras = True) -> str:
     assert length >= 16
-    assert sum([letters, digits, extras]) >= 2
+    assert sum([letters, numbers, extras]) >= 2
 
-    chars = list((string.ascii_letters if letters else '') + (string.digits if digits else '') + (string.punctuation if extras else ''))
+    chars = list((ascii_letters if letters else '') + (digits if numbers else '') + (punctuation if extras else ''))
 
     pwd = ""
     for _ in range(length):
-        random.shuffle(chars)
-        pwd += secrets.choice(chars)
+        shuffle(chars)
+        pwd += choice(chars)
 
     return pwd
